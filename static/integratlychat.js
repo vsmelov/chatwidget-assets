@@ -79,7 +79,7 @@ function createChatLauncher() {
 
 function handleLauncherClick() {
     console.log("Launcher clicked...");
-    const launcher = this;
+    const launcher = document.querySelector('#integratly-launcher');
 
     let iframe = document.querySelector('#integratly-iframe');
     let iframeCreated = false;
