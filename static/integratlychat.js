@@ -1,3 +1,28 @@
+const scriptTag = document.currentScript;
+const projectId = scriptTag.getAttribute('data-project-id');
+
+console.log("Integrate.ly initializing project ", projectId);
+
+function getIntegratlyUserId(projectId) {
+    function generateUniqueID() {
+        return Array(32).fill(0).map(() => Math.floor(Math.random() * 16).toString(16)).join('');
+    }
+
+    const storageKey = `integratly:${projectId}:userId`;
+
+    let integratlyUserId = localStorage.getItem(storageKey);
+
+    if (!integratlyUserId) {
+        integratlyUserId = generateUniqueID();
+        console.log("Integratly: generated userId ", integratlyUserId);
+        localStorage.setItem(storageKey, integratlyUserId);
+    } else {
+        console.log("Integratly: retrieved userId ", integratlyUserId);
+    }
+
+    return integratlyUserId;
+}
+
 // CSS styles for the button and icon
 const styles = `
 .integratly-launcher {
@@ -97,7 +122,7 @@ function handleLauncherClick() {
         iframe.style.borderRadius = '10px';
         iframe.style.boxShadow = '0px 2px 10px 1px #ccc';
         iframe.style.zIndex = '999';
-        iframe.src = 'https://polished-hill-7509.on.fleek.co/';
+        iframe.src = 'https://polished-hill-7509.on.fleek.co/?projectId=' + projectId;
 
         iframe.onload = function() {
             if (iframeCreated) {
