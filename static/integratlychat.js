@@ -2,6 +2,7 @@ const scriptTag = document.currentScript;
 const projectId = scriptTag.getAttribute('data-project-id');
 let apiUrl = scriptTag.getAttribute('data-api-url');
 const divId = scriptTag.getAttribute('data-div-id');
+const userToken = scriptTag.getAttribute('data-user-token');
 
 console.log("integratly.ai: initializing project ", projectId);
 
@@ -121,7 +122,7 @@ function handleLauncherClick() {
         iframe.style.borderRadius = '10px';
         iframe.style.boxShadow = '0px 2px 10px 1px #ccc';
         iframe.style.zIndex = '999';
-        iframe.src = 'https://polished-hill-7509.on.fleek.co/?projectId=' + projectId + '&apiUrl=' + encodeURIComponent(apiUrl);
+        iframe.src = 'https://polished-hill-7509.on.fleek.co/?projectId=' + encodeURIComponent(projectId) + '&apiUrl=' + encodeURIComponent(apiUrl) + '&userToken=' + encodeURIComponent(userToken);
 
         iframe.onload = function() {
             if (iframeCreated) {
