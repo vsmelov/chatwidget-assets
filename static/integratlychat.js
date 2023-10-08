@@ -3,7 +3,7 @@ const projectId = scriptTag.getAttribute('data-project-id');
 let apiUrl = scriptTag.getAttribute('data-api-url');
 const divId = scriptTag.getAttribute('data-div-id');
 
-console.log("Integrate.ly initializing project ", projectId);
+console.log("integratly.ai: initializing project ", projectId);
 
 // CSS styles for the button and icon
 const styles = `
@@ -63,7 +63,7 @@ const styles = `
 
 // Function to create a button on the page
 function createChatLauncher() {
-    console.log("Creating chat launcher...");
+    console.log("integratly.ai: Creating chat launcher...");
 
     // Add styles to the page
     const styleSheet = document.createElement("style");
@@ -81,7 +81,7 @@ function createChatLauncher() {
 
     document.body.appendChild(launcher);
 
-    console.log("Chat launcher created!");
+    console.log("integratly.ai: Chat launcher created!");
 }
 
 function appendIframe(iframe) {
@@ -94,22 +94,22 @@ function appendIframe(iframe) {
         iframe.style.width = '100%';
         iframe.style.height = '100%';
         divContainer.appendChild(iframe);
-        console.log(`Integratly: included webchat in ${divId}`);
+        console.log(`integratly.ai: included webchat in ${divId}`);
     } else {
         document.body.appendChild(iframe);
-        console.log("Integratly: added webchat as a new iframe");
+        console.log("integratly.ai: added webchat as a new iframe");
     }
 }
 
 function handleLauncherClick() {
-    console.log("Launcher clicked...");
+    console.log("integratly.ai: Launcher clicked...");
     const launcher = document.querySelector('#integratly-launcher');
 
     let iframe = document.querySelector('#integratly-iframe');
     let iframeCreated = false;
 
     if (!iframe) {
-        console.log("No iframe found. Creating a new one...");
+        console.log("integratly.ai: No iframe found. Creating a new one...");
         iframeCreated = true;
         iframe = document.createElement('iframe');
         iframe.id = 'integratly-iframe';
@@ -125,24 +125,24 @@ function handleLauncherClick() {
 
         iframe.onload = function() {
             if (iframeCreated) {
-                console.log("Iframe loaded for the first time. Hiding the launcher...");
+                console.log("integratly.ai: Iframe loaded for the first time. Hiding the launcher...");
                 launcher.style.display = 'none'; // Hide the button after iframe loads
             }
         };
 
         appendIframe(iframe);
     } else if (iframe.style.display === 'none' || iframe.style.display === '') {
-        console.log("Iframe was hidden. Showing it now...");
+        console.log("integratly.ai: Iframe was hidden. Showing it now...");
         iframe.style.display = 'block';
 
         if (!iframeCreated) {
-            console.log("send toggle to child");
+            console.log("integratly.ai: send toggle to child");
             iframe.contentWindow.postMessage({
                 type: "TOGGLE_AI_CHAT"
             }, "*");
             launcher.style.display = 'none'; // If iframe already exists, hide the button
         } else {
-            console.log("(iframe created) Don't send toggle to child...");
+            console.log("integratly.ai: (iframe created) Don't send toggle to child...");
         }
 
     } else {
@@ -155,16 +155,16 @@ function handleLauncherClick() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    console.log("All scripts executed. Waiting for 1 seconds...");
+    console.log("integratly.ai: All scripts executed. Waiting for 1 seconds...");
 
     setTimeout(function() {
-        console.log("1 seconds passed. Initializing chat launcher...");
+        console.log("integratly.ai: 1 seconds passed. Initializing chat launcher...");
         createChatLauncher();
     }, 1000);
 });
 
 function closeIframeAndResetLauncher() {
-    console.log("Closing iframe and resetting launcher...");
+    console.log("integratly.ai: Closing iframe and resetting launcher...");
     const iframe = document.querySelector('#integratly-iframe');
     if (iframe) {
         iframe.style.display = 'none';
@@ -178,9 +178,9 @@ function closeIframeAndResetLauncher() {
 
 window.addEventListener("message", function(event) {
     if (event.data.type === "AI_CHAT_CLOSED") {
-        console.log("AI chat closed. Handling event...");
+        console.log("integratly.ai: AI chat closed. Handling event...");
         closeIframeAndResetLauncher();
     } else if (event.data.type === "AI_CHAT_OPENED") {
-        console.log("AI chat opened. No additional actions for now.");
+        console.log("integratly.ai: AI chat opened. No additional actions for now.");
     }
 });
