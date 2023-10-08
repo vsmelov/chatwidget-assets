@@ -1,27 +1,9 @@
 const scriptTag = document.currentScript;
 const projectId = scriptTag.getAttribute('data-project-id');
+let apiUrl = scriptTag.getAttribute('data-api-url');
+const divId = scriptTag.getAttribute('data-div-id');
 
 console.log("Integrate.ly initializing project ", projectId);
-
-function getIntegratlyUserId(projectId) {
-    function generateUniqueID() {
-        return Array(32).fill(0).map(() => Math.floor(Math.random() * 16).toString(16)).join('');
-    }
-
-    const storageKey = `integratly:${projectId}:userId`;
-
-    let integratlyUserId = localStorage.getItem(storageKey);
-
-    if (!integratlyUserId) {
-        integratlyUserId = generateUniqueID();
-        console.log("Integratly: generated userId ", integratlyUserId);
-        localStorage.setItem(storageKey, integratlyUserId);
-    } else {
-        console.log("Integratly: retrieved userId ", integratlyUserId);
-    }
-
-    return integratlyUserId;
-}
 
 // CSS styles for the button and icon
 const styles = `
@@ -102,6 +84,23 @@ function createChatLauncher() {
     console.log("Chat launcher created!");
 }
 
+function appendIframe(iframe) {
+    if (divId && document.getElementById(divId)) {
+        const divContainer = document.getElementById(divId);
+        divContainer.style.position = 'relative';
+        iframe.style.position = 'absolute';
+        iframe.style.top = '0';
+        iframe.style.left = '0';
+        iframe.style.width = '100%';
+        iframe.style.height = '100%';
+        divContainer.appendChild(iframe);
+        console.log(`Integratly: included webchat in ${divId}`);
+    } else {
+        document.body.appendChild(iframe);
+        console.log("Integratly: added webchat as a new iframe");
+    }
+}
+
 function handleLauncherClick() {
     console.log("Launcher clicked...");
     const launcher = document.querySelector('#integratly-launcher');
@@ -122,7 +121,7 @@ function handleLauncherClick() {
         iframe.style.borderRadius = '10px';
         iframe.style.boxShadow = '0px 2px 10px 1px #ccc';
         iframe.style.zIndex = '999';
-        iframe.src = 'https://polished-hill-7509.on.fleek.co/?projectId=' + projectId;
+        iframe.src = 'https://polished-hill-7509.on.fleek.co/?projectId=' + projectId + '&apiUrl=' + encodeURIComponent(apiUrl);
 
         iframe.onload = function() {
             if (iframeCreated) {
@@ -131,7 +130,7 @@ function handleLauncherClick() {
             }
         };
 
-        document.body.appendChild(iframe);
+        appendIframe(iframe);
     } else if (iframe.style.display === 'none' || iframe.style.display === '') {
         console.log("Iframe was hidden. Showing it now...");
         iframe.style.display = 'block';
