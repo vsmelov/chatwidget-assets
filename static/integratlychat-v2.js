@@ -17,11 +17,11 @@ const styles = `
     background-color: transparent !important;
     z-index: 5 !important;
     @media (min-width: 991px) {
-        width: 336px !important;
+        width: 400px !important;
         height: calc(100% - 128px) !important;
-        max-height: 450px !important;
+        max-height: 600px !important;
         top: auto !important;
-        bottom: 128px !important;
+        bottom: 5% !important;
         left: auto !important;
         right: 5% !important;
         box-shadow: 0px 0px 20px rgba(0,0,0,0.2) !important;
