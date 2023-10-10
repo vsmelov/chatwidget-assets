@@ -8,7 +8,6 @@ console.log("integratly.ai: initializing project ", projectId);
 
 // CSS styles for the button and icon
 const styles = `
-
 .aibot {
     position: fixed !important;
     top: 0 !important;
