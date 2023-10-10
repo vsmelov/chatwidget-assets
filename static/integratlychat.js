@@ -8,6 +8,31 @@ console.log("integratly.ai: initializing project ", projectId);
 
 // CSS styles for the button and icon
 const styles = `
+.aibot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    z-index: 5;
+    @media (min-width: 991px) {
+        position: fixed;
+        width: 336px;
+        height: calc(100% - 128px);
+        max-height: 450px;
+        background-color: transparent;
+        z-index: 5;
+        top: auto;
+        bottom: 128px;
+        left: auto;
+        right: 5%;
+        box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
+        border-radius: 10px;
+    }
+    
+}
+
 .integratly-launcher {
     display: flex;
     align-items: center;
@@ -86,8 +111,18 @@ function createChatLauncher() {
 }
 
 function appendIframe(iframe) {
-    if (divId && document.getElementById(divId)) {
-        const divContainer = document.getElementById(divId);
+    if (divId) {
+        let divContainer;
+        if (document.getElementById(divId)) {
+            console.log("integratly.ai: divId found. Creating a new div... divId =", divId);
+            divContainer = document.getElementById(divId);
+        } else {
+            console.log("integratly.ai: divId not found. Creating a new div... divId =", divId);
+            divContainer = document.createElement('div');
+            divContainer.id = divId;
+            divContainer.className = 'aibot';
+            document.body.appendChild(divContainer);
+        }
         divContainer.style.position = 'relative';
         iframe.style.position = 'absolute';
         iframe.style.top = '0';
