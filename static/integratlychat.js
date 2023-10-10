@@ -9,13 +9,13 @@ console.log("integratly.ai: initializing project ", projectId);
 // CSS styles for the button and icon
 const styles = `
 .aibot {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    z-index: 5;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: transparent !important;
+    z-index: 5 !important;
     @media (min-width: 991px) {
         position: fixed;
         width: 336px;
@@ -30,7 +30,6 @@ const styles = `
         box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
         border-radius: 10px;
     }
-    
 }
 
 .integratly-launcher {
