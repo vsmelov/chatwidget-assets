@@ -17,18 +17,15 @@ const styles = `
     background-color: transparent !important;
     z-index: 5 !important;
     @media (min-width: 991px) {
-        position: fixed;
-        width: 336px;
-        height: calc(100% - 128px);
-        max-height: 450px;
-        background-color: transparent;
-        z-index: 5;
-        top: auto;
-        bottom: 128px;
-        left: auto;
-        right: 5%;
-        box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
-        border-radius: 10px;
+        width: 336px !important;
+        height: calc(100% - 128px) !important;
+        max-height: 450px !important;
+        top: auto !important;
+        bottom: 128px !important;
+        left: auto !important;
+        right: 5% !important;
+        box-shadow: 0px 0px 20px rgba(0,0,0,0.2) !important;
+        border-radius: 10px !important;
     }
 }
 
