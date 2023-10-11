@@ -141,6 +141,11 @@ function handleLauncherClick() {
     let iframe = document.querySelector('#integratly-iframe');
     let iframeCreated = false;
 
+    let divContainer;
+    if (divId) {
+        divContainer = document.getElementById(divId);
+    }
+
     if (!iframe) {
         console.log("integratly.ai: No iframe found. Creating a new one...");
         iframeCreated = true;
@@ -167,6 +172,7 @@ function handleLauncherClick() {
     } else if (iframe.style.display === 'none' || iframe.style.display === '') {
         console.log("integratly.ai: Iframe was hidden. Showing it now...");
         iframe.style.display = 'block';
+        divContainer.style.display = 'block';
 
         if (!iframeCreated) {
             console.log("integratly.ai: send toggle to child");
@@ -179,6 +185,8 @@ function handleLauncherClick() {
         }
 
     } else {
+        console.log("integratly.ai: Iframe was visible. Hiding it now...");
+        divContainer.style.display = 'none';
         iframe.style.display = 'none';
         launcher.style.display = 'block'; // Show the button
         launcher.style.animation = 'integratly-rotation-rl 0.5s';
@@ -201,6 +209,13 @@ function closeIframeAndResetLauncher() {
     const iframe = document.querySelector('#integratly-iframe');
     if (iframe) {
         iframe.style.display = 'none';
+    }
+
+    if (divId) {
+        const divContainer = document.getElementById(divId);
+        if (divContainer) {
+            divContainer.style.display = 'none';
+        }
     }
 
     const launcher = document.querySelector('#integratly-launcher');
