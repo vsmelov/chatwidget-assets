@@ -134,6 +134,51 @@ function appendIframe(iframe) {
     }
 }
 
+
+function createHiddenChatWidget() {
+    if (!divId) {
+        return null;
+    }
+    const existingDiv = document.getElementById(divId);
+    if (existingDiv) {
+        return existingDiv;
+    }
+    const divContainer = document.createElement('div');
+    divContainer.id = divId;
+    divContainer.className = 'aibot';
+    const iframe = document.createElement('iframe');
+    iframe.id = 'integratly-iframe';
+    iframe.style.width = '600px';
+    iframe.style.height = '600px';
+    iframe.style.position = 'fixed';
+    iframe.style.bottom = '20px';
+    iframe.style.right = '20px';
+    iframe.style.borderRadius = '10px';
+    iframe.style.boxShadow = '0px 2px 10px 1px #ccc';
+    iframe.style.zIndex = '999';
+    iframe.src = 'https://polished-hill-7509.on.fleek.co/?projectId=' + encodeURIComponent(projectId) + '&apiUrl=' + encodeURIComponent(apiUrl) + '&userToken=' + encodeURIComponent(userToken);
+
+    iframe.style.display = 'none';
+    divContainer.style.display = 'none';
+
+    divContainer.appendChild(iframe);
+    divContainer.style.position = 'fixed';
+    divContainer.style.top = '0';
+    divContainer.style.left = '0';
+    divContainer.style.width = '100%';
+    divContainer.style.height = '100%';
+    divContainer.style.backgroundColor = 'transparent';
+    divContainer.style.zIndex = '5';
+    iframe.style.position = 'absolute';
+    iframe.style.top = '0';
+    iframe.style.left = '0';
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    document.body.appendChild(divContainer);
+    return divContainer;
+}
+
+
 function handleLauncherClick() {
     console.log("integratly.ai: Launcher clicked...");
     const launcher = document.querySelector('#integratly-launcher');
@@ -193,15 +238,24 @@ function handleLauncherClick() {
         launcher.innerHTML = `<img src="https://raw.githubusercontent.com/vsmelov/chatwidget-assets/main/static/launcher_button.svg" alt="Open Chat" />`;
         console.log("close");
     }
+
+    if (iframe.chatActiveInterval === undefined){
+        iframe.chatActiveInterval = setInterval(() => {
+            iframe.contentWindow.postMessage({
+                type: "chatActive"
+            }, "*");
+        }, 100);
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    console.log("integratly.ai: All scripts executed. Waiting for 1 seconds...");
+    console.log("integratly.ai: All scripts executed. Waiting for 100ms...");
 
     setTimeout(function() {
-        console.log("integratly.ai: 1 seconds passed. Initializing chat launcher...");
+        console.log("integratly.ai: 100ms passed. Initializing chat launcher...");
+        createHiddenChatWidget();
         createChatLauncher();
-    }, 1000);
+    }, 100);
 });
 
 function closeIframeAndResetLauncher() {
