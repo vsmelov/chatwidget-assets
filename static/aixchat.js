@@ -99,7 +99,7 @@ function createChatLauncher() {
     const launcher = document.createElement('button');
     launcher.id = 'integratly-launcher';
     launcher.className = 'integratly-launcher';
-    launcher.innerHTML = `<img src="https://raw.githubusercontent.com/vsmelov/chatwidget-assets/main/static/launcher_button.svg" alt="Open Chat" />`;
+    launcher.innerHTML = `<img src="https://eros-ai.cloud/launcher_button.svg" alt="Open Chat" />`;
 
     launcher.onclick = handleLauncherClick;
 
@@ -208,7 +208,10 @@ function handleLauncherClick() {
         iframe.style.borderRadius = '10px';
         iframe.style.boxShadow = '0px 2px 10px 1px #ccc';
         iframe.style.zIndex = '999';
-        iframe.src = 'https://polished-hill-7509.on.fleek.co/?projectId=' + encodeURIComponent(projectId) + '&apiUrl=' + encodeURIComponent(apiUrl) + '&userToken=' + encodeURIComponent(userToken);
+        iframe.src = 'https://polished-hill-7509.on.fleek.co/?projectId=' + encodeURIComponent(projectId) +
+            '&apiUrl=' + encodeURIComponent(apiUrl) +
+            '&userToken=' + encodeURIComponent(userToken) +
+            '&scopeId=' + encodeURIComponent(scopeId);
 
         iframe.onload = function() {
             if (iframeCreated) {
@@ -239,7 +242,7 @@ function handleLauncherClick() {
         iframe.style.display = 'none';
         launcher.style.display = 'block'; // Show the button
         launcher.style.animation = 'integratly-rotation-rl 0.5s';
-        launcher.innerHTML = `<img src="https://raw.githubusercontent.com/vsmelov/chatwidget-assets/main/static/launcher_button.svg" alt="Open Chat" />`;
+        launcher.innerHTML = `<img src="https://eros-ai.cloud/launcher_button.svg" alt="Open Chat" />`;
         console.log("close");
     }
 
@@ -279,7 +282,7 @@ function closeIframeAndResetLauncher() {
     const launcher = document.querySelector('#integratly-launcher');
     launcher.style.display = 'block'; // Show the button
     launcher.style.animation = 'integratly-rotation-rl 0.5s';
-    launcher.innerHTML = `<img src="https://raw.githubusercontent.com/vsmelov/chatwidget-assets/main/static/launcher_button.svg" alt="Open Chat" />`;
+    launcher.innerHTML = `<img src="https://eros-ai.cloud/launcher_button.svg" alt="Open Chat" />`;
 }
 
 window.addEventListener("message", function(event) {
