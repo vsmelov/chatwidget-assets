@@ -10,7 +10,6 @@ function getQueryParam(param) {
   return params.get(param);
 }
 
-// Функция для вставки скрипта с правильным scope_id
 function insertScriptWithScopeId() {
   var scopeId = getQueryParam('scopeId');
   if(scopeId) {
@@ -21,6 +20,13 @@ function insertScriptWithScopeId() {
     script.dataset.apiUrl = "https://eros-ai.cloud:2053";
     script.dataset.userToken = "35e26211fa1d4746bc814f9cb2a478b8";
     script.dataset.divId = "aibot";
+    script.onload = function() {
+      setTimeout(function() {
+        console.log("integratly.ai: 100ms passed. Initializing chat launcher...");
+        createHiddenChatWidget();
+        createChatLauncher();
+      }, 100);
+    };
     document.body.appendChild(script);
   } else {
     console.error("scope_id is required");
