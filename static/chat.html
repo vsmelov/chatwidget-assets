@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>AI Chat Integration</title>
+<script>
+function getQueryParam(param) {
+  var search = window.location.search.substring(1);
+  var params = new URLSearchParams(search);
+  return params.get(param);
+}
+
+// Функция для вставки скрипта с правильным scope_id
+function insertScriptWithScopeId() {
+  var scopeId = getQueryParam('scopeId');
+  if(scopeId) {
+    var script = document.createElement('script');
+    script.src = "https://eros-ai.cloud/aixchat.js";
+    script.dataset.projectId = "scope_" + scopeId;
+    script.dataset.scopeId = scopeId;
+    script.dataset.apiUrl = "https://eros-ai.cloud:2053";
+    script.dataset.userToken = "35e26211fa1d4746bc814f9cb2a478b8";
+    script.dataset.divId = "aibot";
+    document.body.appendChild(script);
+  } else {
+    console.error("scope_id is required");
+  }
+}
+
+document.addEventListener('DOMContentLoaded', insertScriptWithScopeId);
+</script>
+</head>
+<body>
+</body>
+</html>
