@@ -50,12 +50,13 @@ function getQueryParam(param) {
 
 function insertScriptWithScopeId() {
   var scopeId = getQueryParam('scopeId');
+  var port = getQueryParam('port');
   if(scopeId) {
     var script = document.createElement('script');
     script.src = "https://eros-ai.cloud/aixchat.js";
     script.dataset.projectId = "scope_" + scopeId;
     script.dataset.scopeId = scopeId;
-    script.dataset.apiUrl = "https://eros-ai.cloud:2053";
+    script.dataset.apiUrl = "https://eros-ai.cloud:" + port;
     script.dataset.userToken = "35e26211fa1d4746bc814f9cb2a478b8";
     script.dataset.divId = "aibot";
     script.onload = function() {
