@@ -5,19 +5,41 @@
 <title>AI Chat</title>
 
 <style>
-  .fullscreen-div {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-image: url('spinner.gif');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    z-index: 1000;
-    overflow: hidden;
-  }
+.aibot-centered {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: transparent !important;
+    z-index: 5 !important;
+    /* Стили для экранов меньше 991px в ширину: полноэкранный режим */
+    @media (max-width: 990px) {
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 0 !important; /* Убираем скругление для полноэкранного режима */
+    }
+    /* Стили для экранов больше 991px в ширину */
+    @media (min-width: 991px) {
+        width: 80% !important; /* Устанавливаем ширину на 80% для большего пространства */
+        height: calc(100% - 128px) !important;
+        max-width: none !important; /* Снимаем ограничение по максимальной ширине */
+        max-height: none !important; /* Снимаем ограничение по максимальной высоте */
+        top: 5% !important; /* Отступ сверху, для выравнивания по центру */
+        bottom: 5% !important; /* Отступ снизу, для выравнивания по центру */
+        left: 10% !important; /* Отступ слева, для выравнивания по центру */
+        right: 10% !important; /* Отступ справа, для выравнивания по центру */
+        margin: auto !important; /* Автоматические отступы для выравнивания по центру */
+        box-shadow: 0px 0px 20px rgba(0,0,0,0.2) !important;
+        border-radius: 10px !important;
+        transform: translate(-50%, -50%) !important; /* Используем transform для точного центрирования */
+        left: 50% !important; /* Смещаем на 50% влево от центра */
+        top: 50% !important; /* Смещаем на 50% вверх от центра */
+    }
+}
+
 </style>
 
 <script>
@@ -55,6 +77,6 @@ document.addEventListener('DOMContentLoaded', insertScriptWithScopeId);
 </script>
 </head>
 <body>
-<div id="aibot" class="aibot"></div>
+<div id="aibot" class="aibot-centered"></div>
 </body>
 </html>
