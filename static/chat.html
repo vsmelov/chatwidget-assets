@@ -3,6 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>AI Chat Integration</title>
+
+<style>
+  .fullscreen-div {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('spinner.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    z-index: 1000;
+    overflow: hidden;
+  }
+</style>
+
 <script>
 function getQueryParam(param) {
   var search = window.location.search.substring(1);
@@ -25,6 +42,7 @@ function insertScriptWithScopeId() {
         console.log("integratly.ai: 100ms passed. Initializing chat launcher...");
         createHiddenChatWidget();
         createChatLauncher();
+        handleLauncherClick();
       }, 100);
     };
     document.body.appendChild(script);
@@ -39,5 +57,6 @@ document.addEventListener('DOMContentLoaded', insertScriptWithScopeId);
 <body>
 <h1>Chat Demo</h1>
 <img src="spinner.gif" alt="">
+<div id="aibot" class="fullscreen-div"></div>
 </body>
 </html>
