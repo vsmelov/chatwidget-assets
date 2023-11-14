@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>AI Chat</title>
+
+<style>
+.aibot-centered {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: transparent !important;
+    z-index: 5 !important;
+    @media (max-width: 990px) {
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 0 !important; /* Убираем скругление для полноэкранного режима */
+    }
+    @media (min-width: 991px) {
+        width: 70% !important; /* Устанавливаем ширину на 80% для большего пространства */
+        height: calc(100% - 64px) !important;
+        max-width: none !important; /* Снимаем ограничение по максимальной ширине */
+        max-height: none !important; /* Снимаем ограничение по максимальной высоте */
+        top: 3% !important; /* Отступ сверху, для выравнивания по центру */
+        bottom: 3% !important; /* Отступ снизу, для выравнивания по центру */
+        left: 10% !important; /* Отступ слева, для выравнивания по центру */
+        right: 10% !important; /* Отступ справа, для выравнивания по центру */
+        margin: auto !important; /* Автоматические отступы для выравнивания по центру */
+        box-shadow: 0px 0px 20px rgba(0,0,0,0.2) !important;
+        border-radius: 10px !important;
+        /*transform: translate(-50%, -50%) !important; !* Используем transform для точного центрирования *!*/
+        transform: translateX(-50%);
+        left: 50% !important; /* Смещаем на 50% влево от центра */
+        /*top: 50% !important; !* Смещаем на 50% вверх от центра *!*/
+    }
+}
+
+</style>
+
+<script>
+function getQueryParam(param) {
+  var search = window.location.search.substring(1);
+  var params = new URLSearchParams(search);
+  return params.get(param);
+}
+
+function insertScriptWithScopeId() {
+  var scopeId = getQueryParam('scopeId');
+  var port = getQueryParam('port');
+  var domain = getQueryParam('domain');
+  if(scopeId) {
+    var script = document.createElement('script');
+    script.src = "https://eros-ai.cloud/aixchat.js";
+    script.dataset.projectId = "scope_" + scopeId;
+    script.dataset.scopeId = scopeId;
+    script.dataset.apiUrl = "https://" + domain + ":" + port;
+    script.dataset.userToken = "35e26211fa1d4746bc814f9cb2a478b8";
+    script.dataset.divId = "aibot";
+    script.onload = function() {
+      setTimeout(function() {
+        console.log("integratly.ai: 100ms passed. Initializing chat launcher...");
+        createHiddenChatWidget();
+        createChatLauncher();
+        handleLauncherClick();
+      }, 100);
+    };
+    document.body.appendChild(script);
+  } else {
+    console.error("scope_id is required");
+  }
+}
+
+document.addEventListener('DOMContentLoaded', insertScriptWithScopeId);
+</script>
+</head>
+<body>
+<div id="aibot" class="aibot-centered"></div>
+</body>
+</html>
