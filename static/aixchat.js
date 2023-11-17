@@ -16,7 +16,7 @@ const styles = `
     width: 100% !important;
     height: 100% !important;
     background-color: transparent !important;
-    z-index: 5 !important;
+    z-index: 99999 !important;
     @media (min-width: 991px) {
         width: 70% !important;
         height: calc(100% - 128px) !important;
