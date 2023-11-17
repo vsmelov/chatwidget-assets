@@ -156,7 +156,7 @@ function createHiddenChatWidget() {
     iframe.style.right = '20px';
     iframe.style.borderRadius = '10px';
     iframe.style.boxShadow = '0px 2px 10px 1px #ccc';
-    iframe.style.zIndex = '999';
+    iframe.style.zIndex = '99999';
     iframe.src = 'https://polished-hill-7509.on.fleek.co/?projectId=' + encodeURIComponent(projectId) +
         '&apiUrl=' + encodeURIComponent(apiUrl) +
         '&userToken=' + encodeURIComponent(userToken) +
@@ -207,7 +207,7 @@ function handleLauncherClick() {
         iframe.style.right = '20px';
         iframe.style.borderRadius = '10px';
         iframe.style.boxShadow = '0px 2px 10px 1px #ccc';
-        iframe.style.zIndex = '999';
+        iframe.style.zIndex = '99999';
         iframe.src = 'https://polished-hill-7509.on.fleek.co/?projectId=' + encodeURIComponent(projectId) +
             '&apiUrl=' + encodeURIComponent(apiUrl) +
             '&userToken=' + encodeURIComponent(userToken) +
