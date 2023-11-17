@@ -172,7 +172,7 @@ function createHiddenChatWidget() {
     divContainer.style.width = '100%';
     divContainer.style.height = '100%';
     divContainer.style.backgroundColor = 'transparent';
-    divContainer.style.zIndex = '5';
+    divContainer.style.zIndex = '99999';
     iframe.style.position = 'absolute';
     iframe.style.top = '0';
     iframe.style.left = '0';
